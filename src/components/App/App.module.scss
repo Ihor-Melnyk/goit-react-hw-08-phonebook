@@ -1,0 +1,44 @@
+.container {
+  margin-top: 30px;
+  width: 310px;
+  min-height: 650px;
+  margin: 0 auto;
+  padding: 0 20px 30px;
+  background-image: url(../../img/bgc.jpeg);
+  background-size: cover;
+  border-radius: 55px;
+  border: solid 10px black;
+  box-shadow: 1px 3px 6px 1px rgba(0, 0, 0, 0.96);
+  -webkit-box-shadow: 1px 3px 6px 1px rgba(0, 0, 0, 0.96);
+  -moz-box-shadow: 1px 3px 6px 1px rgba(0, 0, 0, 0.96);
+}
+.titlePrimary {
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 0;
+  color: rgb(59, 59, 62);
+  font-size: 45px;
+  font-weight: 900px;
+}
+
+.titleSecondary {
+  margin-left: 0px;
+  margin-right: 0px;
+  text-align: center;
+  padding: 0;
+  color: rgb(59, 59, 62);
+  font-size: 37px;
+  font-weight: 900px;
+}
+
+.img {
+  border: 0;
+  background-color: rgb(0, 0, 0);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  width: 180px;
+  height: 32px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}

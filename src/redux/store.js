@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
+// import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { userApi } from './auth/userApi';
 
 import user from './auth/user';

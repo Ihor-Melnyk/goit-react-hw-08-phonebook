@@ -23,52 +23,53 @@ export const contactSlice = createSlice({
       state.name = payload.name;
     },
   },
-  extraReducers: builder => {
-    //userRegistered
-    builder.addMatcher(
-      userApi.endpoints.createUser.matchFulfilled,
-      (state, { payload }) => {
-        const { user, token } = payload;
+  // extraReducers: builder => {
+  //   //userRegistered
+  //   builder.addMatcher(
+  //     userApi.endpoints.createUser.matchFulfilled,
+  //     (state, { payload }) => {
+  //       const { user, token } = payload;
 
-        state.email = user.email;
-        state.name = user.name;
-        state.token = token;
-      }
-    );
+  //       state.email = user.email;
+  //       state.name = user.name;
+  //       state.token = token;
+  //     }
+  //   );
 
-    //userSuccess
-    builder.addMatcher(
-      userApi.endpoints.logInUser.matchFulfilled,
-      (state, { payload }) => {
-        const { user, token } = payload;
+  //   //userSuccess
+  //   builder.addMatcher(
+  //     userApi.endpoints.logInUser.matchFulfilled,
+  //     (state, { payload }) => {
+  //       const { user, token } = payload;
 
-        state.email = user.email;
-        state.name = user.name;
-        state.token = token;
-      }
-    );
+  //       state.email = user.email;
+  //       state.name = user.name;
+  //       state.token = token;
+  //     }
+  //   );
 
-    //userlogout
-    builder.addMatcher(
-      userApi.endpoints.logOutUser.matchFulfilled,
-      (state, { payload }) => {
-        state.email = initialState.email;
-        state.name = initialState.name;
-        state.token = initialState.token;
-      }
-    );
+  //   //userlogout
+  //   builder.addMatcher(
+  //     userApi.endpoints.logOutUser.matchFulfilled,
+  //     (state, { payload }) => {
+  //       state.email = initialState.email;
+  //       state.name = initialState.name;
+  //       state.token = initialState.token;
+  //     }
+  //   );
 
-    // //userError
-    // builder.addMatcher(
-    //   userApi.endpoints.currentUser.matchRejected,
-    //   (state, { payload }) => {
-    //     if (payload.status === 401) {
-    //       state.token = '';
-    //     }
-    //   }
-    // );
-  },
+  // //userError
+  // builder.addMatcher(
+  //   userApi.endpoints.currentUser.matchRejected,
+  //   (state, { payload }) => {
+  //     if (payload.status === 401) {
+  //       state.token = '';
+  //     }
+  //   }
+  // );
+  // },
 });
 
-export const { loginSuccess, getCurrentSuccess } = userSlice.actions;
-export default userSlice.reducer;
+console.log(contactApi);
+export const { loginSuccess, getCurrentSuccess } = contactApi.actions;
+export default contactApi.reducer;

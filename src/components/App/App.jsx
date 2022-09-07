@@ -1,42 +1,31 @@
-import ContactList from '../ContactList/ContactList';
-import { useState } from 'react';
-import Filter from '../Filter';
-import ContactForm from '../Form/Form';
-import style from './App.module.scss';
-import {
-  useFetchContactsQuery,
-  useDeleteContactMutation,
-} from 'redux/contacts/contactSlice';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import PrivateRoutes from 'components/PrivateRoutes/PrivateRoutes';
+import { useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import ContactsView from 'views/ContactsView';
+import HomeView from 'views/HomeView';
+import LoginView from 'views/LoginView';
+import RegisterView from 'views/RegisterView';
+import { useCurrentUserQuery } from '../../redux/auth/userApi';
 
-export const App = () => {
-  const [filter, setFilter] = useState('');
-  const { data, isFetching } = useFetchContactsQuery();
-  const [deleteContact] = useDeleteContactMutation();
+import AppBar from '../AppBar';
 
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value);
-    console.log(e.currentTarget.value);
-  };
+export default function App() {
+  const { token } = useSelector(state => state.user);
 
-  function getFilterContact() {
-    const normalizedFilter = filter.toLowerCase();
-
-    return data.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  }
+  useCurrentUserQuery(undefined, { skip: !token });
 
   return (
-    <div className={style.container}>
-      <div className={style.img}></div>
-      <h1 className={style.titlePrimary}>Phonebook</h1>
-      <ContactForm contacts={data} />
-      <h2 className={style.titleSecondary}>Contacts</h2>
-      <Filter filter={filter} onChange={changeFilter} />
-      {isFetching && <p>Loading contacts...</p>}
-      {data && (
-        <ContactList contacts={getFilterContact()} onDelete={deleteContact} />
-      )}
-    </div>
+    <Routes>
+      <Route path="/" element={<AppBar />}>
+        <Route index element={<HomeView />} />
+        <Route path="register" element={<RegisterView />} />
+        <Route path="login" element={<LoginView />} />
+        <Route path="/" element={<PrivateRoutes />}>
+          <Route path="contacts" element={<ContactsView />} />
+        </Route>
+        <Route path="*" element={<HomeView />} />
+      </Route>
+    </Routes>
   );
-};
+}

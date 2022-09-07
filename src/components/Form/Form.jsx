@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from './Form.module.scss';
-import { useCreateContactMutation } from 'redux/contacts/contactSlice';
+import { useCreateContactMutation } from 'redux/contacts/contactApi';
 
 export default function ContactForm({ contacts }) {
   const [name, setName] = useState('');

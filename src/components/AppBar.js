@@ -1,6 +1,6 @@
-import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 import { useLogOutUserMutation } from 'redux/auth/userApi';
 
 function AppBar() {

@@ -3,7 +3,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import { userApi } from './auth/userApi';
 
 import user from './auth/user';
-import { contactApi } from './contacts/contactApi';
+// import { contactApi } from './contacts/contactApi';
+import { contactApi } from './contacts/contactSlice';
 
 import {
   FLUSH,

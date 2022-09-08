@@ -7,15 +7,17 @@ import { useLogInUserMutation } from '../redux/auth/userApi';
 // import { loginSuccess } from '../redux/auth/user';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useFetchContactsQuery } from 'redux/contacts/contactApi';
+// import { useFetchContactsQuery } from 'redux/contacts/contactApi';
 
 export default function LoginView() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [logInUser, status] = useLogInUserMutation();
   // const [getContact, opt] = useFetchContactsQuery();
-  console.log(useFetchContactsQuery());
+  // const { Obj } = useFetchContactsQuery();
+  // console.log(useFetchContactsQuery());
   // console.log(useFetchContactsQuery);
+  // console.log('Obj', Obj);
   const { isLoading } = status;
   const { token } = useSelector(state => state.user);
 
@@ -39,9 +41,12 @@ export default function LoginView() {
     };
 
     logInUser(LodInContact);
-    // getContact();
+
+    // console.log(useFetchContactsQuery());
     setEmail('');
     setPassword('');
+    // if (token)
+    // Obj();
   };
 
   return (

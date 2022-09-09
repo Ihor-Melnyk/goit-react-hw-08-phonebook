@@ -1,9 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import { userApi } from './auth/userApi';
-
 import user from './auth/user';
-// import { contactApi } from './contacts/contactApi';
+import { userApi } from './auth/userApi';
+import contact from './contacts/contact';
 import { contactApi } from './contacts/contactSlice';
 
 import {
@@ -18,7 +16,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-//-------- persistor --------
+//-------- persistor user --------
 const userPersistConfig = {
   key: user,
   version: 1,
@@ -26,13 +24,23 @@ const userPersistConfig = {
   blacklist: ['email'],
 };
 
+//-------- persistor  contact--------
+const contactPersistConfig = {
+  key: contact,
+  version: 1,
+  storage,
+  // blacklist: ['email'],
+};
+
 const persistedUserReducer = persistReducer(userPersistConfig, user);
+const persistedContactReducer = persistReducer(contactPersistConfig, contact);
 
 export const store = configureStore({
   reducer: {
     [contactApi.reducerPath]: contactApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     user: persistedUserReducer,
+    contact: persistedContactReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

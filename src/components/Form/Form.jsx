@@ -5,7 +5,7 @@ import { useCreateContactMutation } from 'redux/contacts/contactApi';
 export default function ContactForm({ contacts }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [createContact] = useCreateContactMutation();
+  const createContact = useCreateContactMutation;
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -38,8 +38,10 @@ export default function ContactForm({ contacts }) {
     // if (checkedForName) {
     //   return alert(`${NewContact.name} is already in contacts`);
     // }
+    console.log(NewContact);
+    console.log(createContact);
 
-    createContact(NewContact);
+    // createContact(NewContact);
     reset();
   };
 

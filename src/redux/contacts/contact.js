@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { contactApi } from './contactApi';
+// import { contactApi } from './contactApi';
 
 const initialState = {
   contacts: [],
@@ -12,6 +12,7 @@ export const contactSlice = createSlice({
     getCurrentContactsSuccess: (state, { payload }) => {
       state.name = payload.name;
       state.number = payload.number;
+      state.token = payload.token;
     },
     getCurrent: (state, { payload }) => {
       state.email = payload.email;
@@ -20,5 +21,5 @@ export const contactSlice = createSlice({
   },
 });
 
-export const { getCurrentContactsSuccess, getCurrent } = contactApi.actions;
-export default contactApi.reducer;
+export const { getCurrentContactsSuccess, getCurrent } = contactSlice.actions;
+export default contactSlice.reducer;

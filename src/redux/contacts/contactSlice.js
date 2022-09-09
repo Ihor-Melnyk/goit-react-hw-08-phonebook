@@ -15,6 +15,7 @@ export const contactApi = createApi({
   }),
   tagTypes: ['Contact'],
   endpoints: builder => ({
+    //----- useFetchContactsQuery --------
     fetchContacts: builder.query({
       query: () => ({
         url: `/contacts`,
@@ -23,6 +24,7 @@ export const contactApi = createApi({
       providesTags: ['Contact'],
     }),
 
+    //------ useDeleteContactMutation -------
     deleteContact: builder.mutation({
       query: ContactId => ({
         url: `/contacts/${ContactId}`,
@@ -31,6 +33,7 @@ export const contactApi = createApi({
       invalidatesTags: ['Contact'],
     }),
 
+    //------- useCreateContactMutation -------
     createContact: builder.mutation({
       query: newContact => ({
         url: '/contacts',

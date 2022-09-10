@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useDeleteContactMutation } from 'redux/contacts/contactApi';
 import style from './ContactItem.module.scss';
 

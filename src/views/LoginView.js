@@ -1,13 +1,10 @@
 import { useState } from 'react';
-
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 import { useLogInUserMutation } from '../redux/auth/userApi';
-// import { loginSuccess } from '../redux/auth/user';
-import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import { useFetchContactsQuery } from 'redux/contacts/contactApi';
+import { Navigate } from 'react-router-dom';
 
 export default function LoginView() {
   const [email, setEmail] = useState('');
@@ -44,13 +41,14 @@ export default function LoginView() {
   return (
     <>
       {!token ? (
-        <Container>
+        <Container style={{ maxWidth: '800px' }}>
           <h1>LogIn</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
-                type="text"
+                size="lg"
+                type="email"
                 name="email"
                 value={email}
                 placeholder="Enter email"
@@ -61,7 +59,8 @@ export default function LoginView() {
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type="text"
+                size="lg"
+                type="password"
                 name="password"
                 value={password}
                 placeholder="Enter Password"
@@ -69,7 +68,12 @@ export default function LoginView() {
               />
             </Form.Group>
 
-            <Button variant="primary" disabled={isLoading} type="submit">
+            <Button
+              size="lg"
+              variant="primary"
+              disabled={isLoading}
+              type="submit"
+            >
               Enter
             </Button>
           </Form>

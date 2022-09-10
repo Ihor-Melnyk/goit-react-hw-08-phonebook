@@ -2,6 +2,7 @@ import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { useLogOutUserMutation } from 'redux/auth/userApi';
+import Badge from 'react-bootstrap/Badge';
 
 function AppBar() {
   const { name } = useSelector(state => state.user);
@@ -35,11 +36,16 @@ function AppBar() {
                 </>
               )}
             </Nav>
+            {name && (
+              <>
+                <Badge bg="dark">user: {name}</Badge>
 
-            <Button variant="outline-success" onClick={handleLogoutClick}>
-              {name}
-              Exit
-            </Button>
+                <Button variant="outline-success" onClick={handleLogoutClick}>
+                  Exit
+                </Button>
+              </>
+            )}
+
             {/* </Form> */}
           </Navbar.Collapse>
         </Container>

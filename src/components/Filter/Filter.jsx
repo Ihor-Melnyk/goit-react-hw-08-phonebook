@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
+import { IoIosSearch } from 'react-icons/io';
 
 import Form from 'react-bootstrap/Form';
+import { Container } from 'react-bootstrap';
 
 const Filter = ({ filter, onChange }) => {
   return (
-    <>
-      <Form.Label>Find by name</Form.Label>
+    <Container style={{ maxWidth: '500px' }}>
+      <Form.Label>{<IoIosSearch />} Find by name</Form.Label>
       <Form.Control
         size="lg"
         type="text"
@@ -13,7 +15,7 @@ const Filter = ({ filter, onChange }) => {
         placeholder="find contact"
         onChange={onChange}
       />
-    </>
+    </Container>
   );
 };
 export default Filter;

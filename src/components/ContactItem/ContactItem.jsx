@@ -5,12 +5,19 @@ import { useState } from 'react';
 import { useDeleteContactMutation } from 'redux/contacts/contactApi';
 import style from './ContactItem.module.scss';
 
-const ContactItem = ({ id, name, number }) => {
+const ContactItem = ({
+  id,
+  name,
+  number,
+  // toggleShowModal, showModal
+}) => {
   const [deleteContact] = useDeleteContactMutation();
   const [showModal, setShowModal] = useState(false);
   const toggleShowModal = () => setShowModal(!showModal);
 
-  // const handleEditContact = () => {};
+  const handleEditContact = () => {
+    toggleShowModal();
+  };
   return (
     <>
       <li
@@ -45,7 +52,7 @@ const ContactItem = ({ id, name, number }) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            onClick={toggleShowModal}
+            onClick={handleEditContact}
           >
             <IconEdit
               style={{
@@ -78,7 +85,7 @@ const ContactItem = ({ id, name, number }) => {
           </button>
         </div>
       </li>
-      {showModal && <Example />}
+      {showModal && <Example onClose={toggleShowModal} showModal={showModal} />}
     </>
   );
 };

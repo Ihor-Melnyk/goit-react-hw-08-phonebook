@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 
-function Example() {
-  const [show, setShow] = useState(true);
+function Example({ onClose, showModal }) {
+  // const [show, setShow] = useState(true);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => onClose();
   //   const handleShow = () => setShow(true);
 
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
   return (
     <>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch static backdrop modal
-      </Button> */}
-
       <Modal
-        show={show}
+        show={showModal}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
@@ -35,10 +34,7 @@ function Example() {
               borderRadius: '15px',
             }}
           >
-            <Form
-              o
-              //   nSubmit={handleSubmit}
-            >
+            <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
                 <Form.Control

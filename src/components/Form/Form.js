@@ -1,15 +1,15 @@
+// import { isDisabled } from '@testing-library/user-event/dist/utils';
+import BasicExample from 'components/BasicExample/BasicExample';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import Toast from 'react-bootstrap/Toast';
 import { useCreateContactMutation } from 'redux/contacts/contactApi';
-// import ToastComponent from '../ToastComponent/ToastComponent';
 
 export default function ContactForm({ contacts }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  // const [position, setPosition] = useState('top-start');
+  const [state, setState] = useState(false);
   const [createContact] = useCreateContactMutation();
 
   const handleChange = e => {
@@ -41,21 +41,8 @@ export default function ContactForm({ contacts }) {
     );
 
     if (checkedForName) {
-      return (
-        <Toast>
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-          </Toast.Header>
-          <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
-        </Toast>
-      );
-      // alert(`${NewContact.name} is already in contacts`);
+      setState(!state);
+      return;
     }
 
     createContact(NewContact);
@@ -65,6 +52,7 @@ export default function ContactForm({ contacts }) {
   const reset = e => {
     setName('');
     setNumber('');
+    setState(false);
   };
 
   return (
@@ -109,6 +97,7 @@ export default function ContactForm({ contacts }) {
           Add contact
         </Button>
       </Form>
+      {state && <BasicExample />}
     </Container>
   );
 }

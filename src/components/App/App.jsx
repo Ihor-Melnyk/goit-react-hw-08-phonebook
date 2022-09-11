@@ -1,14 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoutes from 'components/PrivateRoutes/PrivateRoutes';
+import { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import ContactsView from 'views/ContactsView';
-import HomeView from 'views/HomeView';
-import LoginView from 'views/LoginView';
-import RegisterView from 'views/RegisterView';
 import { useCurrentUserQuery } from '../../redux/auth/userApi';
 
-import AppBar from '../AppBar';
+const AppBar = lazy(() => import('../AppBar' /* webpackChunkName: "AppBar" */));
+const HomeView = lazy(() =>
+  import('../../views/HomeView' /* webpackChunkName: "HomeView" */)
+);
+const RegisterView = lazy(() =>
+  import('views/RegisterView' /* webpackChunkName: "RegisterView" */)
+);
+const LoginView = lazy(() =>
+  import('views/LoginView' /* webpackChunkName: "LoginView" */)
+);
+const ContactsView = lazy(() =>
+  import('views/ContactsView' /* webpackChunkName: "ContactsView" */)
+);
 
 export default function App() {
   const { token } = useSelector(state => state.user);
@@ -16,16 +25,18 @@ export default function App() {
   useCurrentUserQuery(undefined, { skip: !token });
 
   return (
-    <Routes>
-      <Route path="/" element={<AppBar />}>
-        <Route index element={<HomeView />} />
-        <Route path="register" element={<RegisterView />} />
-        <Route path="login" element={<LoginView />} />
-        <Route path="/" element={<PrivateRoutes />}>
-          <Route path="contacts" element={<ContactsView />} />
+    <Suspense fallback={<p>Loading</p>}>
+      <Routes>
+        <Route path="/" element={<AppBar />}>
+          <Route index element={<HomeView />} />
+          <Route path="register" element={<RegisterView />} />
+          <Route path="login" element={<LoginView />} />
+          <Route path="/" element={<PrivateRoutes />}>
+            <Route path="contacts" element={<ContactsView />} />
+          </Route>
+          <Route path="*" element={<HomeView />} />
         </Route>
-        <Route path="*" element={<HomeView />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </Suspense>
   );
 }

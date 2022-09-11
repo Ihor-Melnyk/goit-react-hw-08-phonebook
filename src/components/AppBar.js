@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { useLogOutUserMutation } from 'redux/auth/userApi';
 import Badge from 'react-bootstrap/Badge';
+import { FaRegUser } from 'react-icons/fa';
 
 function AppBar() {
   const { name } = useSelector(state => state.user);
@@ -26,9 +27,7 @@ function AppBar() {
             >
               <Nav.Link href="/">Home</Nav.Link>
               {token ? (
-                <>
-                  <Nav.Link href="contacts">Contacts</Nav.Link>
-                </>
+                <Nav.Link href="contacts">Contacts</Nav.Link>
               ) : (
                 <>
                   <Nav.Link href="register">Register</Nav.Link>
@@ -38,15 +37,14 @@ function AppBar() {
             </Nav>
             {name && (
               <>
-                <Badge bg="dark">user: {name}</Badge>
-
+                <Badge bg="dark">
+                  <FaRegUser /> Welcome, {name}
+                </Badge>
                 <Button variant="outline-success" onClick={handleLogoutClick}>
                   Exit
                 </Button>
               </>
             )}
-
-            {/* </Form> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>

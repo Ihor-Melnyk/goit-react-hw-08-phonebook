@@ -1,19 +1,19 @@
-import { IoIosSearch } from 'react-icons/io';
 import PropTypes from 'prop-types';
-import style from './Filter.module.scss';
+
+import Form from 'react-bootstrap/Form';
 
 const Filter = ({ filter, onChange }) => {
   return (
-    <label className={style.label} htmlFor="">
-      {<IoIosSearch />} Find contacts by name
-      <input
-        className={style.input}
+    <>
+      <Form.Label>Find by name</Form.Label>
+      <Form.Control
+        size="lg"
         type="text"
-        placeholder="find contact"
         value={filter}
+        placeholder="find contact"
         onChange={onChange}
       />
-    </label>
+    </>
   );
 };
 export default Filter;

@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PrivateRoutes from 'components/PrivateRoutes/PrivateRoutes';
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
+import PublicRoute from 'components/PublicRoute/PublicRoute';
 import { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -25,15 +26,41 @@ export default function App() {
   useCurrentUserQuery(undefined, { skip: !token });
 
   return (
-    <Suspense fallback={<p>Loading</p>}>
+    <Suspense fallback={<p>Loading ...</p>}>
       <Routes>
         <Route path="/" element={<AppBar />}>
-          <Route index element={<HomeView />} />
-          <Route path="register" element={<RegisterView />} />
-          <Route path="login" element={<LoginView />} />
-          <Route path="/" element={<PrivateRoutes />}>
-            <Route path="contacts" element={<ContactsView />} />
-          </Route>
+          <Route
+            index
+            element={
+              <PublicRoute>
+                <HomeView />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <PublicRoute restricted redirectTo="/">
+                <RegisterView />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <PublicRoute restricted redirectTo="/contacts">
+                <LoginView />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="contacts"
+            element={
+              <PrivateRoute>
+                <ContactsView />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<HomeView />} />
         </Route>
       </Routes>

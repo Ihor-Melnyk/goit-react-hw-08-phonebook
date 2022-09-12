@@ -1,11 +1,11 @@
 import ContactItem from '../ContactItem/ContactItem';
-import Container from 'react-bootstrap/Container';
-import style from './Contact.module.scss';
+import PropTypes from 'prop-types';
+import { ContainerList, List } from './ContactList.styled';
 
 const ContactList = ({ contacts, showModal, setShowModal }) => {
   return (
-    <Container style={{ marginTop: '30px' }}>
-      <ul className={style.list}>
+    <ContainerList>
+      <List>
         {contacts.map(({ id, name, number }) => {
           return (
             <ContactItem
@@ -19,19 +19,20 @@ const ContactList = ({ contacts, showModal, setShowModal }) => {
             />
           );
         })}
-      </ul>
-    </Container>
+      </List>
+    </ContainerList>
   );
 };
 export default ContactList;
 
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       name: PropTypes.string.isRequired,
-//       id: PropTypes.string.isRequired,
-//       phone: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onDelete: PropTypes.func.isRequired,
-// };
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+};

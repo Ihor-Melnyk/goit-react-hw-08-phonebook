@@ -1,6 +1,7 @@
-import Form from '../Form/Form';
+import ContactAddForm from '../Form/ContactAddForm';
 import Modal from 'react-bootstrap/Modal';
 import FormEdit from '../FormEdit/FormEdit';
+import PropTypes from 'prop-types';
 
 function ModalContainer({
   editContact,
@@ -36,7 +37,7 @@ function ModalContainer({
               contacts={contacts}
             />
           ) : (
-            <Form contacts={contacts} onClose={handleClose} />
+            <ContactAddForm contacts={contacts} onClose={handleClose} />
           )}
         </Modal.Body>
       </Modal>
@@ -45,3 +46,20 @@ function ModalContainer({
 }
 
 export default ModalContainer;
+
+ModalContainer.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  editContact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }),
+  setEditContact: PropTypes.func,
+  setShowModal: PropTypes.func.isRequired,
+};

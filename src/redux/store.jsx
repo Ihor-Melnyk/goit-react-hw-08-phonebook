@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import user from './auth/user';
-import { userApi } from './auth/userApi';
+import { userApi } from './auth/userApi.jsx';
 import { contactApi } from './contacts/contactApi';
 
 import {

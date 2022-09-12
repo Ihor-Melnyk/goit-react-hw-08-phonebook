@@ -1,9 +1,17 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import IconEdit from 'components/Icon/IconEdit';
 import ModalContainer from 'components/ModalContainer/ModalContainer';
 import { useState } from 'react';
 import { useDeleteContactMutation } from 'redux/contacts/contactApi';
-import style from './ContactItem.module.scss';
+
+import {
+  Item,
+  Name,
+  ContainerBtn,
+  ButtonEdit,
+  ButtonDelete,
+  DeleteContent,
+} from './ContactItem.styled';
 
 const ContactItem = ({
   id,
@@ -29,40 +37,12 @@ const ContactItem = ({
 
   return (
     <>
-      <li
-        className={style.item}
-        style={{
-          border: '1px solid black',
-          alignItems: 'center',
-          padding: '15px',
-          borderRadius: '10px',
-        }}
-      >
-        <p style={{ margin: '0' }}>
+      <Item>
+        <Name>
           {name}: <span>{number}</span>
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            gap: '10px',
-          }}
-        >
-          <button
-            type="button"
-            display="flex"
-            className={style.btn}
-            style={{
-              width: '35px',
-              height: '35px',
-              borderRadius: '50%',
-              backgroundColor: 'blue ',
-              color: 'white',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            onClick={handleEditContact}
-          >
+        </Name>
+        <ContainerBtn>
+          <ButtonEdit type="button" onClick={handleEditContact}>
             <IconEdit
               style={{
                 display: 'inline-block',
@@ -73,27 +53,12 @@ const ContactItem = ({
                 border: '1px solid red',
               }}
             />
-          </button>
-          <button
-            type="button"
-            style={{
-              width: '35px',
-              height: '35px',
-              borderRadius: '50%',
-              backgroundColor: 'red',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            className={style.btn}
-            onClick={() => deleteContact(id)}
-          >
-            <div
-              style={{ width: '18px', height: '3px', backgroundColor: 'white' }}
-            ></div>
-          </button>
-        </div>
-      </li>
+          </ButtonEdit>
+          <ButtonDelete type="button" onClick={() => deleteContact(id)}>
+            <DeleteContent />
+          </ButtonDelete>
+        </ContainerBtn>
+      </Item>
       {showModal && editContact.name && (
         <ModalContainer
           setShowModal={setShowModal}
@@ -108,9 +73,17 @@ const ContactItem = ({
 
 export default ContactItem;
 
-// ContactItem.propTypes = {
-//   id: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-//   phone: PropTypes.string.isRequired,
-//   onDelete: PropTypes.func.isRequired,
-// };
+ContactItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+};

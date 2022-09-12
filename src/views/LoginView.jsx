@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import { useLogInUserMutation } from '../redux/auth/userApi';
+import { useLogInUserMutation } from '../redux/auth/userApi.jsx';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 

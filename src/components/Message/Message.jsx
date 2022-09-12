@@ -5,12 +5,15 @@ import Toast from 'react-bootstrap/Toast';
 
 function Message() {
   const [showA, setShowA] = useState(true);
-  const toggleShowA = () => setShowA(!showA);
+
+  const handleClose = () => {
+    setShowA(false);
+  };
 
   return (
     <Row>
       <Col md={6} className="mb-2">
-        <Toast show={showA} onClose={toggleShowA}>
+        <Toast show={showA} onClose={handleClose}>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"

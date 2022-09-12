@@ -4,7 +4,7 @@ import PublicRoute from 'components/PublicRoute/PublicRoute';
 import { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { useCurrentUserQuery } from '../../redux/auth/userApi';
+import { useCurrentUserQuery } from '../../redux/auth/userApi.jsx';
 
 const AppBar = lazy(() => import('../AppBar' /* webpackChunkName: "AppBar" */));
 const HomeView = lazy(() =>

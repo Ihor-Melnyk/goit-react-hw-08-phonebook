@@ -1,11 +1,12 @@
 import Message from 'components/Message/Message';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import { ModalAddContactContent } from './FormAdd.Styled';
 import Form from 'react-bootstrap/Form';
 import { useCreateContactMutation } from 'redux/contacts/contactApi';
 
-export default function ContactForm({ contacts, onClose }) {
+export default function ContactAddForm({ contacts, onClose }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [state, setState] = useState(false);
@@ -56,15 +57,7 @@ export default function ContactForm({ contacts, onClose }) {
   };
 
   return (
-    <Container
-      style={{
-        marginTop: '20px',
-        maxWidth: '600px',
-        border: 'solid 1px black',
-        padding: '30px',
-        borderRadius: '15px',
-      }}
-    >
+    <ModalAddContactContent>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Name</Form.Label>
@@ -98,6 +91,17 @@ export default function ContactForm({ contacts, onClose }) {
         </Button>
       </Form>
       {state && <Message />}
-    </Container>
+    </ModalAddContactContent>
   );
 }
+
+ContactAddForm.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  onClose: PropTypes.func.isRequired,
+};

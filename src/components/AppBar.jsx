@@ -1,10 +1,10 @@
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import Badge from 'react-bootstrap/Badge';
+import { FaRegUser } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { useLogOutUserMutation } from 'redux/auth/userApi';
-import Badge from 'react-bootstrap/Badge';
-import { FaRegUser } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { NavLinkHeader } from './AppBar.styled';
 
 function AppBar() {
   const { name } = useSelector(state => state.user);
@@ -22,30 +22,21 @@ function AppBar() {
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-              <NavLink className="d-inline p-2 bg-dark text-white" to="/">
+              <NavLinkHeader className="d-inline p-2  " to="/">
                 Home
-              </NavLink>
+              </NavLinkHeader>
               {token ? (
-                <NavLink
-                  className="d-inline p-2 bg-dark text-white"
-                  to="/contacts"
-                >
+                <NavLinkHeader className="d-inline p-2  " to="/contacts">
                   Contacts
-                </NavLink>
+                </NavLinkHeader>
               ) : (
                 <>
-                  <NavLink
-                    className="d-inline p-2 bg-dark text-white"
-                    to="/register"
-                  >
+                  <NavLinkHeader className="d-inline p-2  " to="/register">
                     Register
-                  </NavLink>
-                  <NavLink
-                    className="d-inline p-2 bg-dark text-white"
-                    to="/login"
-                  >
+                  </NavLinkHeader>
+                  <NavLinkHeader className="d-inline p-2  " to="/login">
                     Login
-                  </NavLink>
+                  </NavLinkHeader>
                 </>
               )}
             </Nav>

@@ -1,16 +1,16 @@
-// import { isDisabled } from '@testing-library/user-event/dist/utils';
 import BasicExample from 'components/BasicExample/BasicExample';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import { useCreateContactMutation } from 'redux/contacts/contactApi';
+import { useEditContactMutation } from 'redux/contacts/contactApi';
 
-export default function ContactForm({ contacts }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export default function FormEdit({ editContact, contacts }) {
+  const { id, name: contactName, number: contactNumber } = editContact;
+  const [name, setName] = useState(() => contactName);
+  const [number, setNumber] = useState(contactNumber);
   const [state, setState] = useState(false);
-  const [createContact] = useCreateContactMutation();
+  const [editContactName] = useEditContactMutation();
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -33,6 +33,7 @@ export default function ContactForm({ contacts }) {
     const NewContact = {
       name: name,
       number: number,
+      id: id,
     };
 
     const normalizedName = NewContact.name.toLowerCase();
@@ -45,14 +46,7 @@ export default function ContactForm({ contacts }) {
       return;
     }
 
-    createContact(NewContact);
-    reset();
-  };
-
-  const reset = e => {
-    setName('');
-    setNumber('');
-    setState(false);
+    editContactName(NewContact);
   };
 
   return (
@@ -94,7 +88,7 @@ export default function ContactForm({ contacts }) {
         </Form.Group>
 
         <Button size="lg" variant="primary" type="submit">
-          Add contact
+          Edit contact
         </Button>
       </Form>
       {state && <BasicExample />}

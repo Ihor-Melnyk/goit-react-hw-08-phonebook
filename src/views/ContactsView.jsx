@@ -3,13 +3,18 @@ import Filter from 'components/Filter';
 import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import ContactForm from '../components/Form/Form';
 import { useFetchContactsQuery } from '../redux/contacts/contactApi';
+import Example from '../components/modal/modal';
 
 export default function ContactsView() {
   const { data: contacts } = useFetchContactsQuery();
-  const [showModal, setShowModal] = useState(false);
   const [filter, setFilter] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const toggleShowModal = () => setShowModal(!showModal);
+
+  const handleAddContact = () => {
+    toggleShowModal();
+  };
 
   const changeFilter = e => {
     setFilter(e.currentTarget.value);
@@ -23,11 +28,6 @@ export default function ContactsView() {
     );
   }
 
-  const toggleShowModal = () => {
-    setShowModal(!showModal);
-    // console.log(showModal);
-  };
-
   return (
     <Container>
       <Button
@@ -36,10 +36,9 @@ export default function ContactsView() {
           width: '60px',
           height: '60px',
           margin: '0',
-          padding: '10px',
           border: 'none',
           borderRadius: '50%',
-          display: 'inline-flex',
+          display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: '#fff',
@@ -47,18 +46,26 @@ export default function ContactsView() {
           backgroundColor: '#4caf50',
           cursor: 'pointer',
           fontSize: '50px',
+          paddingBottom: '10px',
         }}
-        // onClick={toggleShowModal}
+        onClick={handleAddContact}
       >
         +
       </Button>
-      <ContactForm contacts={contacts} />
+      {showModal && (
+        <Example
+          onClose={toggleShowModal}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          contacts={contacts}
+        />
+      )}
       <Filter filter={filter} onChange={changeFilter} />
       {contacts && (
         <ContactList
-          contacts={getFilterContact()}
-          toggleShowModal={toggleShowModal}
           showModal={showModal}
+          setShowModal={setShowModal}
+          contacts={getFilterContact()}
         />
       )}
     </Container>

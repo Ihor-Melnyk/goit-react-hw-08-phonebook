@@ -2,22 +2,20 @@ import ContactItem from '../ContactItem/ContactItem';
 import Container from 'react-bootstrap/Container';
 import style from './Contact.module.scss';
 
-const ContactList = ({
-  contacts,
-  // toggleShowModal, showModal
-}) => {
+const ContactList = ({ contacts, showModal, setShowModal }) => {
   return (
     <Container style={{ maxWidth: '500px', marginTop: '30px' }}>
       <ul className={style.list}>
         {contacts.map(({ id, name, number }) => {
           return (
             <ContactItem
+              contacts={contacts}
+              showModal={showModal}
+              setShowModal={setShowModal}
               key={id}
               id={id}
               name={name}
               number={number}
-              // toggleShowModal={toggleShowModal}
-              // showModal={showModal}
             />
           );
         })}

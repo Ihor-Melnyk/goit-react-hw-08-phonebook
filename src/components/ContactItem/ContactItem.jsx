@@ -9,15 +9,24 @@ const ContactItem = ({
   id,
   name,
   number,
-  // toggleShowModal, showModal
+  showModal,
+  setShowModal,
+  contacts,
 }) => {
   const [deleteContact] = useDeleteContactMutation();
-  const [showModal, setShowModal] = useState(false);
-  const toggleShowModal = () => setShowModal(!showModal);
+  const [editContact, setEditContact] = useState('');
 
   const handleEditContact = () => {
-    toggleShowModal();
+    const newCont = {
+      name: name,
+      number: number,
+      id: id,
+    };
+
+    setEditContact(newCont);
+    setShowModal(true);
   };
+
   return (
     <>
       <li
@@ -85,7 +94,14 @@ const ContactItem = ({
           </button>
         </div>
       </li>
-      {showModal && <Example onClose={toggleShowModal} showModal={showModal} />}
+      {showModal && editContact.name && (
+        <Example
+          setShowModal={setShowModal}
+          editContact={editContact}
+          setEditContact={setEditContact}
+          contacts={contacts}
+        />
+      )}
     </>
   );
 };

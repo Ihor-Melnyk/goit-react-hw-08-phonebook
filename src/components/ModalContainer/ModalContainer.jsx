@@ -1,20 +1,19 @@
 import Form from '../Form/Form';
-// import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FormEdit from '../FormEdit/FormEdit';
 
-function Example({ editContact, setShowModal, setEditContact, contacts }) {
+function ModalContainer({
+  editContact,
+  setEditContact,
+  setShowModal,
+  contacts,
+}) {
   const handleClose = () => {
     setShowModal(false);
     if (editContact) {
       setEditContact('');
     }
   };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   // handleClose();
-  // };
 
   return (
     <>
@@ -31,9 +30,13 @@ function Example({ editContact, setShowModal, setEditContact, contacts }) {
         </Modal.Header>
         <Modal.Body>
           {editContact ? (
-            <FormEdit editContact={editContact} contacts={contacts} />
+            <FormEdit
+              onClose={handleClose}
+              editContact={editContact}
+              contacts={contacts}
+            />
           ) : (
-            <Form contacts={contacts} />
+            <Form contacts={contacts} onClose={handleClose} />
           )}
         </Modal.Body>
       </Modal>
@@ -41,4 +44,4 @@ function Example({ editContact, setShowModal, setEditContact, contacts }) {
   );
 }
 
-export default Example;
+export default ModalContainer;

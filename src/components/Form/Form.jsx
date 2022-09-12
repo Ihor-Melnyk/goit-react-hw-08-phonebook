@@ -1,17 +1,16 @@
-import BasicExample from 'components/BasicExample/BasicExample';
+import Message from 'components/Message/Message';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { useCreateContactMutation } from 'redux/contacts/contactApi';
 
-export default function ContactForm({ contacts }) {
+export default function ContactForm({ contacts, onClose }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [state, setState] = useState(false);
   const [createContact] = useCreateContactMutation();
 
-  // console.log(contacts);
   const handleChange = e => {
     const { name, value } = e.target;
 
@@ -47,6 +46,7 @@ export default function ContactForm({ contacts }) {
 
     createContact(NewContact);
     reset();
+    onClose();
   };
 
   const reset = e => {
@@ -97,7 +97,7 @@ export default function ContactForm({ contacts }) {
           Add contact
         </Button>
       </Form>
-      {state && <BasicExample />}
+      {state && <Message />}
     </Container>
   );
 }

@@ -4,7 +4,8 @@ import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useFetchContactsQuery } from '../redux/contacts/contactApi';
-import Example from '../components/modal/modal';
+import style from '../components/ContactItem/ContactItem.module.scss';
+import ModalContainer from '../components/ModalContainer/ModalContainer';
 
 export default function ContactsView() {
   const { data: contacts } = useFetchContactsQuery();
@@ -29,31 +30,35 @@ export default function ContactsView() {
   }
 
   return (
-    <Container>
-      <Button
-        type="button"
-        style={{
-          width: '60px',
-          height: '60px',
-          margin: '0',
-          border: 'none',
-          borderRadius: '50%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#fff',
-          font: 'inherit',
-          backgroundColor: '#4caf50',
-          cursor: 'pointer',
-          fontSize: '50px',
-          paddingBottom: '10px',
-        }}
-        onClick={handleAddContact}
-      >
-        +
-      </Button>
+    <Container style={{ maxWidth: '500px', padding: '0 15px' }}>
+      <Container>
+        <Button
+          className={style.btn}
+          type="button"
+          style={{
+            width: '60px',
+            height: '60px',
+            margin: '15px 0 5px',
+            marginLeft: 'auto',
+            border: '1px  black',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#fff',
+            font: 'inherit',
+            backgroundColor: '#4caf50',
+            cursor: 'pointer',
+            fontSize: '50px',
+            paddingBottom: '10px',
+          }}
+          onClick={handleAddContact}
+        >
+          +
+        </Button>
+      </Container>
       {showModal && (
-        <Example
+        <ModalContainer
           onClose={toggleShowModal}
           showModal={showModal}
           setShowModal={setShowModal}

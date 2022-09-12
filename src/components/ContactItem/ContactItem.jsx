@@ -1,6 +1,6 @@
 // import PropTypes from 'prop-types';
 import IconEdit from 'components/Icon/IconEdit';
-import Example from 'components/modal/modal';
+import ModalContainer from 'components/ModalContainer/ModalContainer';
 import { useState } from 'react';
 import { useDeleteContactMutation } from 'redux/contacts/contactApi';
 import style from './ContactItem.module.scss';
@@ -95,7 +95,7 @@ const ContactItem = ({
         </div>
       </li>
       {showModal && editContact.name && (
-        <Example
+        <ModalContainer
           setShowModal={setShowModal}
           editContact={editContact}
           setEditContact={setEditContact}

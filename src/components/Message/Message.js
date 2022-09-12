@@ -3,7 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 
-function BasicExample() {
+function Message() {
   const [showA, setShowA] = useState(true);
   const toggleShowA = () => setShowA(!showA);
 
@@ -26,4 +26,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default Message;

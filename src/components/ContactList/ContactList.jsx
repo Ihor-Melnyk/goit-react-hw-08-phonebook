@@ -4,7 +4,7 @@ import style from './Contact.module.scss';
 
 const ContactList = ({ contacts, showModal, setShowModal }) => {
   return (
-    <Container style={{ maxWidth: '500px', marginTop: '30px' }}>
+    <Container style={{ marginTop: '30px' }}>
       <ul className={style.list}>
         {contacts.map(({ id, name, number }) => {
           return (

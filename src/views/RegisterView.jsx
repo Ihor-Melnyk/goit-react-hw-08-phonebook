@@ -40,7 +40,7 @@ export default function RegisterView() {
   };
 
   return (
-    <Container>
+    <Container style={{ maxWidth: '800px' }}>
       <h1>Registration</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">

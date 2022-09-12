@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap';
 
 const Filter = ({ filter, onChange }) => {
   return (
-    <Container style={{ maxWidth: '500px' }}>
+    <Container>
       <Form.Label>{<IoIosSearch />} Find by name</Form.Label>
       <Form.Control
         size="lg"

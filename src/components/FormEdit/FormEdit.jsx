@@ -1,11 +1,11 @@
-import BasicExample from 'components/BasicExample/BasicExample';
+import Message from 'components/Message/Message';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { useEditContactMutation } from 'redux/contacts/contactApi';
 
-export default function FormEdit({ editContact, contacts }) {
+export default function FormEdit({ editContact, contacts, onClose }) {
   const { id, name: contactName, number: contactNumber } = editContact;
   const [name, setName] = useState(() => contactName);
   const [number, setNumber] = useState(contactNumber);
@@ -47,6 +47,7 @@ export default function FormEdit({ editContact, contacts }) {
     }
 
     editContactName(NewContact);
+    onClose();
   };
 
   return (
@@ -91,7 +92,7 @@ export default function FormEdit({ editContact, contacts }) {
           Edit contact
         </Button>
       </Form>
-      {state && <BasicExample />}
+      {state && <Message />}
     </Container>
   );
 }

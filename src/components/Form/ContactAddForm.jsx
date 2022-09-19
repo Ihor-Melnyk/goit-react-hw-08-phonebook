@@ -11,6 +11,7 @@ export default function ContactAddForm({ contacts, onClose }) {
   const [number, setNumber] = useState('');
   const [state, setState] = useState(false);
   const [createContact] = useCreateContactMutation();
+  const errorMessage = 'This contact is already in the PhoneBook!';
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -90,7 +91,7 @@ export default function ContactAddForm({ contacts, onClose }) {
           Add contact
         </Button>
       </Form>
-      {state && <Message />}
+      {state && <Message errorMessage={errorMessage} />}
     </ModalAddContactContent>
   );
 }

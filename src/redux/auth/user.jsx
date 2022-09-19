@@ -57,16 +57,6 @@ export const userSlice = createSlice({
         state.token = initialState.token;
       }
     );
-
-    // //userError
-    // builder.addMatcher(
-    //   userApi.endpoints.currentUser.matchRejected,
-    //   (state, { payload }) => {
-    //     if (payload.status === 401) {
-    //       state.token = '';
-    //     }
-    //   }
-    // );
   },
 });
 

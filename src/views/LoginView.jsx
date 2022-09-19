@@ -5,13 +5,15 @@ import Form from 'react-bootstrap/Form';
 import { useLogInUserMutation } from '../redux/auth/userApi.jsx';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import Message from 'components/Message/Message';
 
 export default function LoginView() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [logInUser, status] = useLogInUserMutation();
-  const { isLoading } = status;
+  const [logInUser, option] = useLogInUserMutation();
+  const { isLoading, isError } = option;
   const { token } = useSelector(state => state.user);
+  const errorMessage = 'Incorrect login or password';
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -31,7 +33,6 @@ export default function LoginView() {
       email: email,
       password: password,
     };
-
     logInUser(LodInContact);
 
     setEmail('');
@@ -81,6 +82,7 @@ export default function LoginView() {
       ) : (
         <Navigate to="/" />
       )}
+      {isError && <Message errorMessage={errorMessage} />}
     </>
   );
 }

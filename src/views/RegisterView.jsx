@@ -3,12 +3,15 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import { useCreateUserMutation } from '../redux/auth/userApi.jsx';
+import Message from 'components/Message/Message';
 
 export default function RegisterView() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [createUser] = useCreateUserMutation();
+  const [createUser, option] = useCreateUserMutation();
+  const { isError } = option;
+  const errorMessage = 'Incorrect login or password';
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -83,6 +86,7 @@ export default function RegisterView() {
           Enter
         </Button>
       </Form>
+      {isError && <Message errorMessage={errorMessage} />}
     </Container>
   );
 }

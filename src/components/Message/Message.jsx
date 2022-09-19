@@ -3,9 +3,9 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 
-function Message() {
+function Message({ errorMessage }) {
   const [showA, setShowA] = useState(true);
-
+  console.log(errorMessage);
   const handleClose = () => {
     setShowA(false);
   };
@@ -22,7 +22,7 @@ function Message() {
             />
             <strong className="me-auto">PhoneBook</strong>
           </Toast.Header>
-          <Toast.Body>This contact is already in the PhoneBook!</Toast.Body>
+          <Toast.Body>{errorMessage}</Toast.Body>
         </Toast>
       </Col>
     </Row>

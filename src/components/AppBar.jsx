@@ -5,11 +5,19 @@ import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { useLogOutUserMutation } from 'redux/auth/userApi';
 import { NavLinkHeader } from './AppBar.styled';
+import ReactSwitch from 'react-switch';
+import { useState } from 'react';
 
 function AppBar() {
   const { name } = useSelector(state => state.user);
   const [logout] = useLogOutUserMutation();
   const { token } = useSelector(state => state.user);
+  const [theme, setTheme] = useState('dark');
+
+  const toggleTheme = () => {
+    setTheme(curr => (curr === 'light' ? 'dark' : 'light'));
+  };
+
   const handleLogoutClick = () => {
     logout();
   };
@@ -42,6 +50,10 @@ function AppBar() {
             </Nav>
             {name && (
               <>
+                <ReactSwitch
+                  onChange={toggleTheme}
+                  checked={theme === 'dark'}
+                />
                 <Badge bg="dark">
                   <FaRegUser /> Welcome, {name}
                 </Badge>
